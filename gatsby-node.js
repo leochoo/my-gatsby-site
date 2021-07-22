@@ -8,6 +8,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
     const slug = createFilePath({ node, getNode, basePath: `blog` });
+    console.log("slug created", slug);
     createNodeField({
       node,
       name: `slug`,
@@ -15,6 +16,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     });
   }
 };
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
