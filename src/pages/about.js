@@ -1,6 +1,5 @@
 // Step 1: Import your component
 import * as React from "react";
-import { Link } from "gatsby";
 import Layout from "../components/layout";
 
 // Step 2: Define your component
