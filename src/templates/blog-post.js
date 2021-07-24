@@ -1,29 +1,27 @@
 import React from "react";
-import Layout from "../components/layout";
 import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-
-export default function BlogPost({ data }) {
-  const post = data.mdx;
+import { Link } from "gatsby";
+const shortcodes = { Link }; // Provide common components here
+export default function PageTemplate({ data: { mdx } }) {
   return (
-    <Layout>
-      <div>
-        <h1>{post.frontmatter.title}</h1>
-        {/* <div dangerouslySetInnerHTML={{ __html: post.html }} /> */}
-        <MDXRenderer>{post.body}</MDXRenderer>
-      </div>
-    </Layout>
+    <div>
+      <h1>{mdx.frontmatter.title}</h1>
+      <MDXProvider components={shortcodes}>
+        <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
+      </MDXProvider>
+    </div>
   );
 }
-export const query = graphql`
-  query ($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
-      slug
+export const pageQuery = graphql`
+  query BlogPostQuery($id: String) {
+    mdx(id: { eq: $id }) {
+      id
+      body
       frontmatter {
         title
       }
-      id
-      body
     }
   }
 `;
