@@ -1,3 +1,7 @@
+// I finally made it work!!!!
+// 2021-07-24 17:28:33.874Z
+// The previous code was not working, but it is exactly the same as the current code, hence I am adding this to differentiate.
+
 const { createFilePath } = require("gatsby-source-filesystem");
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
